@@ -1,5 +1,5 @@
 <template>
-    <img class="avtar-container" :src="url" alt="" :style="{ width: size + 'px', height: size + 'px' }">
+    <img class="avatar-container" :src="url" alt="" :style="{ width: size + 'px', height: size + 'px' }">
 </template>
 
 <script>
@@ -18,7 +18,7 @@ export default {
 </script>
 
 <style scoped>
-.avtar-container {
+.avatar-container {
     border-radius: 50%;
     object-fit: cover;
     /* 防止图片拉升 */

@@ -37,11 +37,12 @@ export default {
     color: #fff;
     ul li{
         display: flex;
-        padding: 10px;
+        line-height: 40px;
         color: @secondary;
-
+        padding-left: 30px;
+        cursor: pointer;
         span{
-            line-height: 30px;
+            line-height: 40px;
             font-size: 14px;
         }
     }
