@@ -1,0 +1,24 @@
+@import '~@/styles/mixin.less';
+@import '~@/styles/var.less';
+.message{
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    border-radius: 5px;
+    box-shadow: -2px 2px 5px #ccc;
+    color: #fff;
+    
+    .self-center();
+}
+.message-info{
+    background-color: @primary;
+}
+.message-success{
+    background-color: @success;
+}
+.message-warn{
+    background-color: @warn;
+}
+.message-error{
+    background-color: @danger;
+}
