@@ -1,18 +1,18 @@
 <template>
-  <div class="contact-container">
-    <ul>
-        <li v-for="item in info" :key="item">
-            <Icon :type="item.icon" :size="30"/>
-            <span>{{ item.title }}</span>
-        </li>
-    </ul>
-  </div>
+    <div class="contact-container">
+        <ul>
+            <li v-for="(item, index) in info" :key="index">
+                <Icon :type="item.icon" :size="30" />
+                <span>{{ item.title }}</span>
+            </li>
+        </ul>
+    </div>
 </template>
 
 <script>
 import Icon from '@/components/Icon'
 export default {
-    data(){
+    data() {
         return {
             info: [
                 { icon: 'github', title: 'limodong' },
@@ -22,7 +22,7 @@ export default {
             ]
         }
     },
-    components:{
+    components: {
         Icon
     }
 }
@@ -32,21 +32,25 @@ export default {
 @import "~@/styles/global.less";
 @import "~@/styles/var.less";
 @import '~@/styles/mixin.less';
-.contact-container{
+
+.contact-container {
     .self-fill();
     color: #fff;
-    ul li{
+
+    ul li {
         display: flex;
         line-height: 40px;
         color: @secondary;
         padding-left: 30px;
         cursor: pointer;
-        span{
+
+        span {
             line-height: 40px;
             font-size: 14px;
         }
     }
-    .icon-container{
+
+    .icon-container {
         margin-right: 8px;
     }
 }

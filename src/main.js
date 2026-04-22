@@ -3,8 +3,10 @@ import App from './App.vue';
 import './styles/global.less';
 import router from './router';
 import { showMessage } from './utils/showMessage'
+import './mock'; // mock必须在axios请求之前引入，否则无法拦截请求
+import './api/banner';
 
-showMessage({ type: 'success', content: "评论成功", duration: 1000, callback: () => {console.log("回调函数。。。。")} })
+Vue.prototype.$showMessage = showMessage;
 new Vue({
   router,
   render: h => h(App),

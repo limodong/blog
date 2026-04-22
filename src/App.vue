@@ -2,9 +2,7 @@
   <div class="app-container">
    <Layout>
       <template #default>
-          <div class="main">
             <router-view></router-view>
-          </div>
       </template>
       <template #left>
           <div class="aside">
