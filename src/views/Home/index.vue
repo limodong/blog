@@ -1,8 +1,8 @@
 <template>
-  <div class="home-container">
-    <ul class="carousel-ul" ref="carouselUlRef" :style="{ marginTop: marginTop + 'px' }">
+  <div class="home-container" @wheel="handleWheel">
+    <ul class="carousel-ul" ref="carouselUlRef" :style="{ marginTop: marginTop + 'px' }" @transitionend="handleTransitionend">
       <li v-for="item in banner" :key="item.id" :style="{ height: bannerHeight + 'px' }">
-        <Carousel :bigImg="item.bigImg" :midImg="item.midImg"></Carousel>
+        <Carousel :carousel="item"></Carousel>
       </li>
     </ul>
     <div class=" icon icon-up" v-show="current > 0" @click="--current">
@@ -11,9 +11,9 @@
     <div class="icon icon-down" v-show="current < banner.length - 1" @click="current++">
       <Icon type="arrowDown"></Icon>
     </div>
-    <ul class="indicator-container" @click="handleIndicatorClick">
-      <li class="indicator" :class="{ active: index === current }" :data-index="index" v-for="(item, index) in banner"
-        :key="item.id"></li>
+    <ul class="indicator-container">
+      <li class="indicator" :class="{ active: index === current }" v-for="(item, index) in banner"
+        :key="item.id" @click="handleIndicatorClick"></li>
     </ul>
   </div>
 </template>
@@ -27,7 +27,8 @@ export default {
     return {
       banner: [],
       bannerHeight: 0,
-      current: 0
+      current: 0,
+      isWheeling: false
     }
   },
   computed: {
@@ -40,11 +41,29 @@ export default {
     Carousel
   },
   methods: {
-    handleIndicatorClick(event) {
-      console.log(event);
-      if (event.target.nodeName === "LI") {
-        this.current = event.target.dataset.index
+    // 点击指示器事件
+    handleIndicatorClick(index) {
+      this.current = index;
+    },
+    // 鼠标滚轮滑动时，首页图片也跟着滚动
+    handleWheel(e){
+      if (this.isWheeling) {
+        return;
       }
+      if (e.deltaY >= 100 && this.current < this.banner.length-1) {// 下一页
+        this.isWheeling = true;
+          this.current++;
+      }
+      else if (e.deltaY <= -100 && this.current > 0) {// 上一页
+        this.isWheeling = true;
+        
+        this.current--;
+      }
+      console.log(this.isWheeling,this.current,e.deltaY);
+    },
+    // 监听transition动效结束后的函数处理
+    handleTransitionend(){
+      this.isWheeling = false;
     }
   },
   async created() {
@@ -52,6 +71,7 @@ export default {
   },
   mounted() {
     this.bannerHeight = this.$refs.carouselUlRef.clientHeight;
+
   }
 }
 </script>

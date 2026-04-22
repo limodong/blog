@@ -26,7 +26,6 @@ export default {
 
     .left,
     .right {
-        opacity: 0;
         flex: 0 0 auto; // 宽度不可压缩
         overflow: hidden;
     }
