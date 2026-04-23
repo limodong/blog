@@ -1,34 +1,37 @@
 <template>
   <div class="home-container" @wheel="handleWheel">
-    <ul class="carousel-ul" ref="carouselUlRef" :style="{ marginTop: marginTop + 'px' }" @transitionend="handleTransitionend">
-      <li v-for="item in banner" :key="item.id" :style="{ height: bannerHeight + 'px' }">
+    <ul v-loading="isLoading" class="carousel-ul" ref="carouselUlRef" :style="{ marginTop: marginTop + 'px' }"
+      @transitionend="handleTransitionend">
+      <li v-for="item in data" :key="item.id" :style="{ height: bannerHeight + 'px' }">
         <Carousel :carousel="item"></Carousel>
       </li>
     </ul>
     <div class=" icon icon-up" v-show="current > 0" @click="--current">
       <Icon type="arrowUp"></Icon>
     </div>
-    <div class="icon icon-down" v-show="current < banner.length - 1" @click="current++">
+    <div class="icon icon-down" v-show="current < data.length - 1" @click="current++">
       <Icon type="arrowDown"></Icon>
     </div>
     <ul class="indicator-container">
-      <li class="indicator" :class="{ active: index === current }" v-for="(item, index) in banner"
-        :key="item.id" @click="handleIndicatorClick"></li>
+      <li class="indicator" :class="{ active: index === current }" v-for="(item, index) in data" :key="item.id"
+        @click="handleIndicatorClick"></li>
     </ul>
   </div>
 </template>
 
 <script>
+import fetchData from '@/mixins/fetchData'
 import api from '@/api';
 import Icon from '@/components/Icon';
 import Carousel from './Carousel';
 export default {
+  mixins: [fetchData([])],
   data() {
     return {
-      banner: [],
       bannerHeight: 0,
+      bannerWidth: 0,
       current: 0,
-      isWheeling: false
+      isWheeling: false,
     }
   },
   computed: {
@@ -46,32 +49,41 @@ export default {
       this.current = index;
     },
     // 鼠标滚轮滑动时，首页图片也跟着滚动
-    handleWheel(e){
+    handleWheel(e) {
       if (this.isWheeling) {
         return;
       }
-      if (e.deltaY >= 100 && this.current < this.banner.length-1) {// 下一页
+      if (e.deltaY >= 100 && this.current < this.data.length - 1) {// 下一页
         this.isWheeling = true;
-          this.current++;
+        this.current++;
       }
       else if (e.deltaY <= -100 && this.current > 0) {// 上一页
         this.isWheeling = true;
-        
+
         this.current--;
       }
-      console.log(this.isWheeling,this.current,e.deltaY);
+      console.log(this.isWheeling, this.current, e.deltaY);
     },
     // 监听transition动效结束后的函数处理
-    handleTransitionend(){
+    handleTransitionend() {
       this.isWheeling = false;
+    },
+    // 监听窗口尺寸变化，变化时对应的banner的尺寸也要随着变化
+    handleResize() {
+      this.bannerHeight = this.$refs.carouselUlRef.clientHeight;
+      this.bannerWidth = this.$refs.carouselUlRef.clientWidth;
+    },
+    // 导入了混入mixins，在created生命周期中会调用此方法来获取远程数据，然后远程数据存储在mixins中的data属性中，也就是通过this.data就可以获取到远程数据。
+    fetchData() {
+      return api.getBanner();
     }
-  },
-  async created() {
-    this.banner = await api.getBanner();
   },
   mounted() {
     this.bannerHeight = this.$refs.carouselUlRef.clientHeight;
-
+    window.addEventListener('resize', this.handleResize);
+  },
+  destroyed() {
+    window.removeEventListener('resize', this.handleResize);
   }
 }
 </script>

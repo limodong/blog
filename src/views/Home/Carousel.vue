@@ -5,7 +5,7 @@
             <h2 ref="titleRef">{{ carousel.title }}</h2>
             <p ref="descriptionRef">{{ carousel.description }}</p>
         </div>
-        
+
     </div>
 </template>
 
@@ -18,7 +18,7 @@ export default {
         titleWidth: 0,
         descriptionWidth: 0
     },
-    mounted(){
+    mounted() {
         // 动态获取元素的宽度
         this.titleWidth = this.$refs.titleRef.clientWidth;
         this.descriptionWidth = this.$refs.descriptionRef.clientWidth;
@@ -40,14 +40,14 @@ export default {
     height: 100%;
     position: relative;
     background-color: #fff;
-    
-    .text-container{
+
+    .text-container {
         position: absolute;
         top: 50%;
         left: 5%;
         color: #fff;
         text-shadow: 1px 0 0 #000, -1px 0 #000, 0 1px 0 #000, 0 -1px 0 #000;
-        
+
     }
 
     .imageLoader-container {
@@ -55,12 +55,15 @@ export default {
         height: 100%;
     }
 }
-h2,p{
+
+h2,
+p {
     white-space: nowrap;
     transition: 2s;
     overflow: hidden;
 }
-p{
+
+p {
     transition: 2s 1s;
 }
 </style>
