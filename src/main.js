@@ -4,6 +4,7 @@ import './styles/global.less';
 import router from './router';
 import { showMessage } from './utils/showMessage'
 import './mock'; // mock必须在axios请求之前引入，否则无法拦截请求
+import './mock/blog'; // mock必须在axios请求之前引入，否则无法拦截请求
 import vLoading from './directives/loading'
 
 // vue原型上挂载消息弹窗
