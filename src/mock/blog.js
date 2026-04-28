@@ -1,10 +1,36 @@
-mock.mock('/api/blogtype','get',{
+import Mock from 'mockjs'
+Mock.mock('/api/blogtype','get',{
     code: 0,
     msg: "",
-    'data|50-100': [
+    'data|10-20': [
         {
             'id|+1': 1,
-            'name': '分类@id'
+            'name': '分类@id',
+            'articleCount|100-1000': 0,
+            'order|+1': 0
         }
     ]
+})
+
+Mock.mock('/api/blog', 'get', {
+    code: 0,
+    msg: "",
+    data: {
+        'rows|500-1000': [
+            {
+                'id': '@guid',
+                'title': '@csentence(4,20)',
+                'description': '@cparagraph',
+                category: {
+                    'id|1-20': 1,
+                    'name':'分类@id'
+                },
+                'scanNumber|1000-10000': 0,
+                'commentNumber|0-300':0,
+                'thumb': Mock.Random.dataImage('200x200','picture'),
+                'createDate': () => Date.now() - 365*3 * 24 * 3600 * 1000 // 3年前
+            }
+        ],
+        'total': '@row.length'
+    }
 })
