@@ -1,5 +1,5 @@
 <template>
-    <div class="pager-container" v-if="total !== 0">
+    <div class="pager-container" v-if="total!==0">
         <!-- <h2>{{ minVisible }}-{{ maxVisible }}</h2> -->
         <a @click="handleClick(1)">首页</a>
         <a @click="handleClick(current - 1)">&lt;</a>
@@ -17,7 +17,7 @@ export default {
         // 当前选中的页码
         current: {
             type: Number,
-            default: 2
+            default: 1
         },
         // 每页的数据量
         limit: {
@@ -29,7 +29,7 @@ export default {
             type: Number,
             default: 0
         },
-        // 分页组件可现实的分页数
+        // 可见的页码数(比如有100条数据，可见页码数就是100 / limit-1)
         visiblePageNum: {
             type: Number,
             default: 10
@@ -37,7 +37,7 @@ export default {
     },
     computed: {
         pageNumber() {
-            return Math.ceil(this.total / this.limit) - 1; // 总页数
+            return Math.ceil(this.total / this.limit) ; // 总页数
         },
         // 分页组件显示的最小页码数，也就是分页组件的第一个页码数字
         minVisible() {

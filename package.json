@@ -12,11 +12,14 @@
     "test:ImageLoader": "vue serve ./src/components/ImageLoader/test.vue",
     "test:Contact": "vue serve ./src/components/Contact/test.vue",
     "test:Side": "vue serve ./src/components/Side/test.vue",
-    "test:Layout": "vue serve ./src/components/Layout/test.vue"
+    "test:Layout": "vue serve ./src/components/Layout/test.vue",
+    "test:LoadingButton": "vue serve ./src/components/LoadingButton/test.vue",
+    "test:Form": "vue serve ./src/components/Form/test.vue"
   },
   "dependencies": {
     "axios": "^1.15.1",
     "core-js": "^3.6.5",
+    "highlight.js": "^11.11.1",
     "mockjs": "^1.1.0",
     "vue": "^2.6.11",
     "vue-router": "^3.4.9"

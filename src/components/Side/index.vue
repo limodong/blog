@@ -26,7 +26,6 @@ export default {
 @import'~@/styles/var.less';
 
 .side-container {
-    opacity: 0;
     position: relative;
     width: 100%;
     height: 100%;
