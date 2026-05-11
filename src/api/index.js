@@ -1,6 +1,6 @@
 import { getBanner } from './banner';
-import { getBlogCategory,getBlogList,getBlogDatil } from './blog'
+import { getBlogCategory,getBlogList,getBlogDatil,getCommentList } from './blog'
 export default {
     getBanner,
-    getBlogCategory,getBlogList,getBlogDatil
+    getBlogCategory, getBlogList, getBlogDatil, getCommentList
 }

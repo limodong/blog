@@ -66,7 +66,7 @@ export default {
 
   .right-container {
     position: relative;
-    width: 250px;
+    width: 300px;
     height: 100%;
     .all{
       line-height: 30px;

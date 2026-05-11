@@ -1,20 +1,20 @@
 <template>
-  <div class="detail-container">
-    <Layout>
-        <template #default>
-            <div class="blog-detail-container"  v-loading="isLoading">
-                <BlogDetail :detail="data" v-if="data"/>
-            </div>
-            
-        </template>
+    <div class="detail-container">
+        <Layout>
+            <template #default>
+                <div class="blog-detail-container" v-loading="isLoading">
+                    <BlogDetail :detail="data" v-if="data" :detailLoading="isLoading" />
+                </div>
 
-        <template #right>
-            <div class="right-container" v-loading="isLoading">
-                <BlogTOC :list="data.toc" v-if="data"/>
-            </div>
-        </template>
-    </Layout>
-  </div>
+            </template>
+
+            <template #right>
+                <div class="right-container" v-loading="isLoading">
+                    <BlogTOC :list="data.toc" v-if="data" />
+                </div>
+            </template>
+        </Layout>
+    </div>
 </template>
 
 <script>
@@ -29,7 +29,7 @@ export default {
 
     },
     methods: {
-        async fetchData(){
+        async fetchData() {
             return await Api.getBlogDatil(this.$route.params.id);
         }
     },
@@ -42,15 +42,17 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.detail-container{
+.detail-container {
     width: 100%;
     height: 100%;
 }
-.blog-detail-container{
+
+.blog-detail-container {
     height: 100%;
 }
-.right-container{
-    width: 250px;
+
+.right-container {
+    width: 350px;
     height: 100%;
 }
 </style>

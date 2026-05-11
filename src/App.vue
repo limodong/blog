@@ -1,13 +1,13 @@
 <template>
   <div class="app-container">
-   <Layout>
+    <Layout>
       <template #default>
-            <router-view></router-view>
+        <router-view></router-view>
       </template>
       <template #left>
-          <div class="aside">
-              <Side/>
-          </div>
+        <div class="aside">
+          <Side />
+        </div>
       </template>
     </Layout>
   </div>
@@ -27,12 +27,14 @@ export default {
 
 <style lang="less">
 @import '~@/styles/global.less';
+
 .app-container {
   width: 100%;
   height: 100%;
-  .aside{
+
+  .aside {
     height: 100%;
-    width: 250px;
+    width: 300px;
     background-color: #000;
   }
 }

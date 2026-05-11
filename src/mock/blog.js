@@ -281,3 +281,21 @@ Mock.mock('/api/comment','post',{
     avatar: Mock.Random.dataImage('300x250','#000','#fff', 'picture'),
     }
 })
+Mock.mock(/^\/api\/commentpage(\?.+)?$/, {
+  code: 0,
+  msg: "",
+  data: {
+    'rows|20': [
+      {
+        'id': '@guid',
+        'nickname': '@cname',
+        'content': '@cparagraph',
+        'avatar': Mock.Random.dataImage('300x250', '#000', '#fff', 'picture'), // 可能有缩略图，可能没有
+        'createDate': `@date('T')` // 获取一个时间戳
+      }
+    ],
+    'total': function () {
+      return this.rows.length;
+    }
+  }
+})
